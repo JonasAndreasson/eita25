@@ -68,6 +68,7 @@ public class client {
             String issuer = cert.getIssuerDN().getName();
             System.out.println("certificate name (subject DN field) on certificate received from server:\n" + subject + "\n");
             System.out.println("issuer name (subject DN field) on issuer received from server:\n" + issuer + "\n");
+            System.out.println("certificate serial number: " + cert.getSerialNumber());
             System.out.println("socket after handshake:\n" + socket + "\n");
             System.out.println("secure connection established\n\n");
 
