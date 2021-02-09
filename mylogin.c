@@ -42,8 +42,8 @@ void read_username(char *username)
 }
 void read_password(char *password)
 {
-  
-  getpass(password,USERNAME_SIZE, stdin);
+  printf("password: ");
+  password = getpass();
 
   /* remove the newline included by getline() */
   password[strlen(password) - 1] = '\0';
