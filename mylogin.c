@@ -53,7 +53,7 @@ void read_password(char *password)
 int check_passwd(const char *username, const char *password)
 {
   struct pwdb_passwd *p = pwdb_getpwnam(username);
-  if (p != NULL){
+  if (p == NULL){
     return 1;
   }
   const char *salt = substr(p->pw_passwd, 0, 2);

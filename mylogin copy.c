@@ -53,7 +53,7 @@ void read_password(char *password)
 int check_passwd(const char *username, const char *password)
 {
   struct pwdb_passwd *p = pwdb_getpwnam(username);
-  if (p != NULL){
+  if (p == NULL){
     return 1;
   }
   if(p->pw_failed >= 5){
@@ -72,6 +72,9 @@ int check_passwd(const char *username, const char *password)
 int failed_login(const char *username)
 {
   struct pwdb_passwd *p = pwdb_getpwnam(username);
+  if(p == NULL){
+    return 0;
+  }
   if(p->pw_failed < 5){
     p->pw_failed = p->pw_failed + 1;
     return p->pw_failed;
