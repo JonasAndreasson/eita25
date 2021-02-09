@@ -57,10 +57,10 @@ int check_passwd(const char *username, const char *password)
     return 1;
   }
   const char *salt = p->pw_passwd;
-  const char* cryptedhashcode = crypt(password,salt);
-  printf("%s\n",cryptedhashcode);
+  const char *deshash = crypt(password,salt);
+  printf("%s\n",deshash);
   printf("%s\n", salt);
-  if (strcmp(cryptedhashcode, p->pw_passwd)==0){
+  if (strcmp(deshash, p->pw_passwd)==0){
     return 0;
   } else {
     return 1;
@@ -86,6 +86,7 @@ int main(int argc, char **argv)
     var = check_passwd(username, password);
     if (var == 1){
       printf("Unknown user or incorrect password\n");
+      password[USERNAME_SIZE];
     }
 
   }
