@@ -49,42 +49,15 @@ void read_password(char *password)
   password[strlen(password) - 1] = '\0';
   
 }
-char* substr(const char *src, int m, int n)
-{
-    int len = n - m;
-    printf("Before mem dump");
-    char *dest = (char*)malloc(sizeof(char) * (len + 1));
-    printf("After mem dump");
-    for (int i = m; i < n && (*(src + i) != '\0'); i++)
-    {
-        *dest = *(src + i);
-        dest++;
-    }
-    *dest = '\0';
-    return dest - len;
-}
-
-const char getHash(const char* username){
-  struct pwdb_passwd *p = pwdb_getpwnam(username);
-  if (p == NULL){
-    return "";
-  }
-  const char hash[USERNAME_SIZE];
-  strcpy(hash, p->pw_passwd);
-  return hash;
-}
 
 int check_passwd(const char *username, const char *password)
 {
-  printf("Nu kollas password");
   struct pwdb_passwd *p = pwdb_getpwnam(username);
   if (p == NULL){
     return 1;
   }
-  printf("Nu saltar vi");
-  const char hash = getHash(username);
-  const char *salt = substr(hash, 0, 1);
-  if (strcmp(crypt(password,salt), hash)==0){
+  const char *salt = p->pw_passwd;
+  if (strcmp(crypt(password,salt), p->pw_passwd)==0){
     return 0;
   } else {
     return 1;
