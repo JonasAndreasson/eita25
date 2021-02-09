@@ -52,7 +52,9 @@ void read_password(char *password)
 char* substr(const char *src, int m, int n)
 {
     int len = n - m;
+    printf("Before mem dump");
     char *dest = (char*)malloc(sizeof(char) * (len + 1));
+    printf("After mem dump");
     for (int i = m; i < n && (*(src + i) != '\0'); i++)
     {
         *dest = *(src + i);
