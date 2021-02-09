@@ -42,7 +42,7 @@ void read_username(char *username)
 }
 void read_password(char *password)
 {
-  password = getpass("password: ");
+  *password = getpass("password: ");
   printf("Length of password: %ld\n",strlen(password));
   printf("Password: %s\n", password);
   printf("*password: %d\n", *password);
