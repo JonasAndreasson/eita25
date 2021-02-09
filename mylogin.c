@@ -42,8 +42,8 @@ void read_username(char *username)
 }
 void read_password(char *password)
 {
-  *password = getpass("password: ");
-  printf("Length of password: %ld\n",strlen(password));
+  password = getpass("password: ");
+  printf("Length of password: %ld\n",strlen(*password));
   printf("Password: %s\n", password);
   printf("*password: %d\n", *password);
   
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
   while (var == 1)
   {
     read_username(username);
-    read_password(password);
+    read_password(&password);
     var = check_passwd(username, password);
     if (var == 1){
       printf("Unknown user or incorrect password\n");
