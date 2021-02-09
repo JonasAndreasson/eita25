@@ -43,7 +43,7 @@ void read_username(char *username)
 void read_password(char *password)
 {
   
-  password = getpass("Password: ");
+  password = getpass("\nPassword: ");
 
   /* remove the newline included by getline() */
   password[strlen(password) - 1] = '\0';
@@ -58,8 +58,8 @@ int check_passwd(const char *username, const char *password)
   }
   const char *salt = p->pw_passwd;
   const char* cryptedhashcode = crypt(password,salt);
-  printf("%s",cryptedhashcode);
-  printf("%s", salt);
+  printf("%s\n",cryptedhashcode);
+  printf("%s\n", salt);
   if (strcmp(cryptedhashcode, p->pw_passwd)==0){
     return 0;
   } else {
