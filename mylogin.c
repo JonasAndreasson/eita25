@@ -40,22 +40,22 @@ void read_username(char *username)
   /* remove the newline included by getline() */
   username[strlen(username) - 1] = '\0';
 }
-void read_password(char *password)
+void read_password(char password)
 {
-  *password = getpass("password: ");
-  printf("%s\n",*password);
+  password = getpass("password: ");
+  printf("%s\n",password);
   
 }
 
-int check_passwd(const char *username, const char *password)
+int check_passwd(const char *username, const char password)
 {
   struct pwdb_passwd *p = pwdb_getpwnam(username);
   if (p == NULL){
     return 1;
   }
   const char *salt = p->pw_passwd;
-  const char *deshash = crypt(*password,salt);
-  printf("%s\n", *password);
+  const char *deshash = crypt(password,salt);
+  printf("%s\n", password);
   printf("%s\n",deshash);
   printf("%s\n", salt);
   if (strcmp(deshash, p->pw_passwd)==0){
