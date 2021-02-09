@@ -83,7 +83,7 @@ int main(int argc, char **argv)
   while (var == 1)
   {
     read_username(username);
-    read_password(&password);
+    read_password(password);
     var = check_passwd(username, password);
     if (var == 1){
       printf("Unknown user or incorrect password\n");
