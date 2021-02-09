@@ -57,7 +57,7 @@ int check_passwd(const char *username, const char *password)
   }
   const char *salt = p->pw_passwd;
   const char *deshash = crypt(password,salt);
-  printf("%d\n", *password);
+  printf("%s\n", password);
   printf("%s\n",deshash);
   printf("%s\n", salt);
   if (strcmp(deshash, p->pw_passwd)==0){
