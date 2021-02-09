@@ -83,7 +83,6 @@ int main(int argc, char **argv)
     var = check_passwd(username, password);
     if (var == 1){
       printf("Unknown user or incorrect password\n");
-      password[USERNAME_SIZE];
     }
 
   }
