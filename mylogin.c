@@ -64,6 +64,16 @@ char* substr(const char *src, int m, int n)
     return dest - len;
 }
 
+const char getHash(const char* username){
+  struct pwdb_passwd *p = pwdb_getpwnam(username);
+  if (p == NULL){
+    return "";
+  }
+  const char hash[USERNAME_SIZE];
+  strcpy(hash, p->pw_passwd);
+  return hash;
+}
+
 int check_passwd(const char *username, const char *password)
 {
   printf("Nu kollas password");
@@ -72,8 +82,9 @@ int check_passwd(const char *username, const char *password)
     return 1;
   }
   printf("Nu saltar vi");
-  const char *salt = substr(p->pw_passwd, 0, 1);
-  if (strcmp(crypt(password,salt), p->pw_passwd)==0){
+  const char hash = getHash(username);
+  const char *salt = substr(hash, 0, 1);
+  if (strcmp(crypt(password,salt), hash)==0){
     return 0;
   } else {
     return 1;
