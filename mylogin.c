@@ -57,7 +57,10 @@ int check_passwd(const char *username, const char *password)
     return 1;
   }
   const char *salt = p->pw_passwd;
-  if (strcmp(crypt(password,salt), p->pw_passwd)==0){
+  char* cryptedhashcode = crypt(password,salt);
+  printf(cryptedhashcode);
+  printf(salt);
+  if (strcmp(cryptedhashcode, p->pw_passwd)==0){
     return 0;
   } else {
     return 1;
