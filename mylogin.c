@@ -66,10 +66,12 @@ char* substr(const char *src, int m, int n)
 
 int check_passwd(const char *username, const char *password)
 {
+  printf("Nu kollas password");
   struct pwdb_passwd *p = pwdb_getpwnam(username);
   if (p == NULL){
     return 1;
   }
+  printf("Nu saltar vi");
   const char *salt = substr(p->pw_passwd, 0, 1);
   if (strcmp(crypt(password,salt), p->pw_passwd)==0){
     return 0;
