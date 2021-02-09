@@ -58,7 +58,7 @@ int check_passwd(const char *username, const char *password)
   }
   
   
-  if (strcmp(crypt(password), p->pw_passwd)==0){
+  if (strcmp(crypt(password,""), p->pw_passwd)==0){
     return 0;
   } else {
     return 1;
