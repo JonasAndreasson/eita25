@@ -49,6 +49,18 @@ void read_password(char *password)
   password[strlen(password) - 1] = '\0';
   
 }
+char* substr(const char *src, int m, int n)
+{
+    int len = n - m;
+    char *dest = (char*)malloc(sizeof(char) * (len + 1));
+    for (int i = m; i < n && (*(src + i) != '\0'); i++)
+    {
+        *dest = *(src + i);
+        dest++;
+    }
+    *dest = '\0';
+    return dest - len;
+}
 
 int check_passwd(const char *username, const char *password)
 {
@@ -60,10 +72,7 @@ int check_passwd(const char *username, const char *password)
     fprint("This account is locked.");
     return 1;
   }
-  char *start = &p->pw_passwd[0];
-  char *end = &p->pw_passwd[1];
-  const char *salt = (char *)calloc(2,2);
-  memcpy(salt, start, end);
+  const char *salt = substr(p->pw_passwd, 0, 1);
   if (strcmp(crypt(password,salt), p->pw_passwd)==0){
     return 0;
   } else {
