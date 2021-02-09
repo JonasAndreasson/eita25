@@ -43,7 +43,7 @@ void read_username(char *username)
 void read_password(char *password)
 {
   
-  password = getpass("\nPassword: ");
+  getpass(password,USERNAME_SIZE, stdin);
 
   /* remove the newline included by getline() */
   password[strlen(password) - 1] = '\0';
