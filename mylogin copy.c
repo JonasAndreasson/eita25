@@ -60,9 +60,9 @@ int check_passwd(const char *username, const char *password)
     fprint("This account is locked.");
     return 1;
   }
+  const char *salt = substr(p->pw_passwd, 0, 2);
   
-  
-  if (strcmp(crypt(password), p->pw_passwd)==0){
+  if (strcmp(crypt(password,salt), p->pw_passwd)==0){
     return 0;
   } else {
     return 1;
@@ -110,7 +110,7 @@ int main(int argc, char **argv)
       
       break;
     }
-    printf("Unknown user or incorrect password");
+    printf("Unknown user or incorrect password\n");
     failed_login(username);
   }
   printf("User authenticated successfully");

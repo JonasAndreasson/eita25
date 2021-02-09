@@ -56,9 +56,9 @@ int check_passwd(const char *username, const char *password)
   if (p != NULL){
     return 1;
   }
+  const char *salt = substr(p->pw_passwd, 0, 2);
   
-  
-  if (strcmp(crypt(password,""), p->pw_passwd)==0){
+  if (strcmp(crypt(password,salt), p->pw_passwd)==0){
     return 0;
   } else {
     return 1;
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
     read_password(password);
     var = check_passwd(username, password);
     if (var == 1){
-      printf("Unknown user or incorrect password");
+      printf("Unknown user or incorrect password\n");
     }
 
   }
