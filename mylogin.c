@@ -40,15 +40,6 @@ void read_username(char *username)
   /* remove the newline included by getline() */
   username[strlen(username) - 1] = '\0';
 }
-void read_password(char *password)
-{
-  printf("Password before password: %s\n", password);
-  password = getpass("password: ");
-  printf("Length of password: %ld\n",strlen(*password));
-  printf("Password: %s\n", password);
-  printf("*password: %d\n", *password);
-  
-}
 
 int check_passwd(const char *username, const char *password)
 {
@@ -57,11 +48,7 @@ int check_passwd(const char *username, const char *password)
     return 1;
   }
   char *salt = p->pw_passwd;
-   printf("Prior to hash: %s\n", password);
   char *deshash = crypt(password,salt);
-  printf("Post hash: %s\n", password);
-  printf("%s\n",deshash);
-  printf("%s\n", salt);
   if (strcmp(deshash, p->pw_passwd)==0){
     return 0;
   } else {
@@ -75,7 +62,7 @@ int check_passwd(const char *username, const char *password)
 int main(int argc, char **argv)
 {
   char username[USERNAME_SIZE];
-  char password[USERNAME_SIZE];
+  char *password;
   /* 
    * Write "login: " and read user input. Copies the username to the
    * username variable.
@@ -85,14 +72,14 @@ int main(int argc, char **argv)
   {
     read_username(username);
     //delete read_password and just do getpass here???
-    read_password(password);
+    password = getpass("password: ");
     var = check_passwd(username, password);
     if (var == 1){
       printf("Unknown user or incorrect password\n");
     }
 
   }
-  printf("User authenticated successfully");
+  printf("User authenticated successfully\n");
 }
   
 

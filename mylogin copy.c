@@ -40,15 +40,6 @@ void read_username(char *username)
   /* remove the newline included by getline() */
   username[strlen(username) - 1] = '\0';
 }
-void read_password(char *password)
-{
-  
-  password = getpass("Password: ");
-
-  /* remove the newline included by getline() */
-  password[strlen(password) - 1] = '\0';
-  
-}
 
 
 int check_passwd(const char *username, const char *password)
@@ -59,9 +50,6 @@ int check_passwd(const char *username, const char *password)
   }
   const char *salt = p->pw_passwd;
   const char *deshash = crypt(password,salt);
-  printf("%s\n", password);
-  printf("%s\n",deshash);
-  printf("%s\n", salt);
   if (strcmp(deshash, p->pw_passwd)==0){
     return 0;
   } else {
@@ -95,7 +83,7 @@ int successful_login(const char *username)
 int main(int argc, char **argv)
 {
   char username[USERNAME_SIZE];
-  char password[USERNAME_SIZE];
+  char *password;
   /* 
    * Write "login: " and read user input. Copies the username to the
    * username variable.
@@ -104,7 +92,7 @@ int main(int argc, char **argv)
   while (var == 1)
   {
     read_username(username);
-    read_password(password);
+    password = getpass("password: ");
     var = check_passwd(username, password);
     if (var == 0){
       if(successful_login(username) > 10){
