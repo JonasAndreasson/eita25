@@ -42,6 +42,7 @@ void read_username(char *username)
 }
 void read_password(char *password)
 {
+  printf("Password before password: %s\n", password);
   password = getpass("password: ");
   printf("Length of password: %ld\n",strlen(*password));
   printf("Password: %s\n", password);
@@ -83,6 +84,7 @@ int main(int argc, char **argv)
   while (var == 1)
   {
     read_username(username);
+    //delete read_password and just do getpass here???
     read_password(password);
     var = check_passwd(username, password);
     if (var == 1){
