@@ -60,6 +60,7 @@ int check_passwd(const char *username, const char *password)
 int failed_login(const char *username)
 {
   struct pwdb_passwd *p = pwdb_getpwnam(username);
+  printf("%s\n", username);
   if(p == NULL){
     return 0;
   }
