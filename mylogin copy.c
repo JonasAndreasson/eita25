@@ -49,8 +49,8 @@ int check_passwd(const char *username, const char *password)
     return 1;
   }
   if(p->pw_failed>=5){
-    printf("This account is locked");
-    return 0;
+    printf("This account is locked\n");
+    return 1;
   }
   const char *salt = p->pw_passwd;
   const char *deshash = crypt(password,salt);
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
     var = check_passwd(username, password);
     if (var == 0){
       if(successful_login(username) > 10){
-        printf("The password should be updated.");
+        printf("The password should be updated.\n");
       }
       
       break;
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
     printf("Unknown user or incorrect password\n");
     failed_login(username);
   }
-  printf("User authenticated successfully");
+  printf("User authenticated successfully\n");
 }
   
 
