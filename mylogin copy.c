@@ -60,14 +60,15 @@ int check_passwd(const char *username, const char *password)
 int failed_login(const char *username)
 {
   struct pwdb_passwd *p = pwdb_getpwnam(username);
+  int newValue = p->pw_failed + 1;
   printf("%s\n", username);
   if(p == NULL){
     return 0;
   }
   printf("%i\n",p->pw_failed);
   if(p->pw_failed < 5){
-    p->pw_failed++;
-    printf("Entered successfully");
+    p->pw_failed = &newValue;
+    printf("Entered successfully\n");
     printf("%i\n", p->pw_failed);
     return p->pw_failed;
   }
