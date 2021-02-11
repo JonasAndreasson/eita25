@@ -67,7 +67,8 @@ int failed_login(const char *username)
   printf("%i\n",p->pw_failed);
   if(p->pw_failed < 5){
     p->pw_failed++;
-    
+    printf("Entered successfully");
+    printf("%i\n", p->pw_failed);
     return p->pw_failed;
   }
   else {
