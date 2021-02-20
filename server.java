@@ -92,6 +92,7 @@ public class server implements Runnable {
                 tmf.init(ts);  // possible to use keystore as truststore here
                 ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
                 ssf = ctx.getServerSocketFactory();
+                System.out.println(ctx.getProtocol());
                 return ssf;
             } catch (Exception e) {
                 e.printStackTrace();
